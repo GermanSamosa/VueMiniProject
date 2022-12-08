@@ -1,19 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// import views from '../views'
 import HomeView from '../views/HomeView.vue'
+// import FriendManager from '../view/FriendManager'
+// import AddFriend from '../view/AddFriend'
+// import ViewFriend from '../view/ViewFriend'
+// import EditFriend from '../view/EditFriend'
+
 
 const routes = [
   {
     path: '/',
     name: 'home',
+    redirect: '/friends',
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/friends',
+    name: 'FriendManager',
+    component: AddFriend
+  },
+  {
+    path: '/friends/add',
+    name: 'AddFriend',
+    component: AddFriend
+  },
+  {
+    path: '/friends/edit/:friendId',
+    name: 'EditFriend',
+    component: EditFriend
+  },
+  {
+    path: '/friends/view/:friendId',
+    name: 'ViewFriend',
+    component: ViewFriend
   }
 ]
 
