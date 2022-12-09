@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\server",
+    "\\services",
+    "\\src",
+    "\\src\\components",
+    "\\src\\router",
+    "\\src\\views"
+  ],
+  "SelectedNode": "\\src\\views\\FriendManager.vue",
+  "PreviewInSolutionExplorer": false
+}
