@@ -8,28 +8,33 @@
                 <div class="col-md-4">
                     <form @submit.prevent="submitCreate()">
                         <div class="mb-2">
-                            <input v-model="friend.name" type="text" class="input form-control" placeholder="Name" />
+                            <input required v-model="friend.name" type="text" class="input form-control" placeholder="Name" />
                         </div>
                         <div class="mb-2">
-                            <input v-model="friend.photo" type="text" class="input form-control" placeholder="Photo URL" />
+                            <input required  v-model="friend.photo" type="text" class="input form-control" placeholder="Photo URL" />
                         </div>
                         <div class="mb-2">
-                            <input type="email" v-model="friend.email" class="input form-control" placeholder="Email" />
+                            <input required  type="email" v-model="friend.email" class="input form-control" placeholder="Email" />
                         </div>
                         <div class="mb-2">
-                            <input type="Number" v-model="friend.mobile" class="input form-control" placeholder="Mobile" />
+                            <input required  type="Number" v-model="friend.mobile" class="input form-control" placeholder="Mobile" />
                         </div>
                         <div class="mb-2">
-                            <select class="input form-control" v-if="groups.length>0">
-                                <option class="input" v-for="group of groups"
-                                       :key="group.id" :value="group.id">{{group.name}}</option>
+                            <select required v-model="friend.groupID" class="input form-control" v-if="groups.length>0">
+                                <option class="input subtle" value="">
+                                    Select a group
+                                </option>
+                                <option class="input" :value="group.id" v-for="group of groups"
+                                        :key="group.id">
+                                    {{group.name}}
+                                </option>
                             </select>
                         </div>
                         <div class="mb-2">
-                            <input type="text" v-model="friend.company" class="input form-control" placeholder="Company" />
+                            <input required  type="text" v-model="friend.company" class="input form-control" placeholder="Company" />
                         </div>
                         <div class="mb-2">
-                            <input type="Submit" class="btn btn-dark" value="Create Friend" />
+                            <input required  type="Submit" class="btn btn-dark" value="Create Friend" />
                         </div>
                     </form>
                 </div>
@@ -42,7 +47,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>

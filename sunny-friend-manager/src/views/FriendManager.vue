@@ -52,7 +52,7 @@
                         <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
                             <router-link :to="`/friends/view/${friend.id}`" class="btn my-1 btn-primary btn-sm"><i class="bi bi-eye"></i></router-link>
                             <router-link :to="`/friends/edit/${friend.id}`" class="btn my-1 btn-warning btn-sm"><i class="bi bi-pencil"></i></router-link>
-                            <button class="my-1 btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
+                            <button @click="clickDeleteFriend(friend.id)" class="my-1 btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
                         </div>
                     </div>
                 </div>
@@ -93,17 +93,30 @@ export default {
             }
         },
         methods: {
-
+            clickDeleteFriend: async function (friendId) {
+                try {
+                    let response = await FriendService.deleteFriend(friendId);
+                    if (response) {
+                        let response = await FriendService.getALLFriends();
+                        this.friends = response.data;
+                    }
+                }
+                catch (error) {
+                    this.errorMessage = error;
+                    this.loading = false;
+                }
+            }
         }
 }
 </script>
 
 <style scoped>
-    .addbtn, .searchbar, .profile_containers {
+    .addbtn, .searchbar, .profile_containers, .input {
         border: 1px solid black;
     }
     .addbtn{
         background-color:orange;
+        color: white;
     }
     .title{
         color:black;

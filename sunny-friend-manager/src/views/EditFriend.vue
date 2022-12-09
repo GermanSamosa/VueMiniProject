@@ -1,5 +1,4 @@
 <template>
-    <pre>{{friend}}</pre>
         <div class="container mt-3">
             <div class="row">
                 <h3 class="title text-black fw-bold"><b>Edit Friend</b></h3>
@@ -7,26 +6,26 @@
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-4">
-                        <form>
+                        <form @submit.prevent="updateSubmit()">
                             <div class="mb-2">
-                                <input type="text" v-model="friend.name" class="input form-control" placeholder="Name" />
+                                <input required  type="text" v-model="friend.name" class="input form-control" placeholder="Name" />
                             </div>
                             <div class="mb-2">
-                                <input type="text" v-model="friend.photo" class="input form-control" placeholder="Photo URL" />
+                                <input required  type="text" v-model="friend.photo" class="input form-control" placeholder="Photo URL" />
                             </div>
                             <div class="mb-2">
-                                <input type="email" v-model="friend.email" class="input form-control" placeholder="Email" />
+                                <input required  type="email" v-model="friend.email" class="input form-control" placeholder="Email" />
                             </div>
                             <div class="mb-2">
-                                <input type="Number" v-model="friend.mobile" class="input form-control" placeholder="Mobile" />
+                                <input required  v-model="friend.mobile" type="number" class="input form-control" placeholder="Mobile" />
                             </div>
                             <div class="mb-2">
-                                <select class="input form-control">
-                                    <option class="input" value=""></option>
+                                <select required v-model="friend.groupID" class="input form-control" v-if="groups.length>0">
+                                    <option class="input" :value="group.id" v-for="group of groups" :key="group.id">{{group.name}}</option>
                                 </select>
                             </div>
                             <div class="mb-2">
-                                <input type="text" class="input form-control" placeholder="Company" />
+                                <input required  type="text" v-model="friend.company" class="input form-control" placeholder="Company" />
                             </div>
                             <div class="mb-2">
                                 <input type="Submit" class="btn btn-dark" value="Update Friend" />
@@ -35,7 +34,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <img src="https://img.freepik.com/premium-vector/hand-drawn-vector-abstract-cartoon-flat-minimalistic-modern-graphic-girl-avatar-portrait-character-with-earrings-stock-illustration-art-isolated-white-background_200084-2586.jpg?w=2000" class="contact-img" alt="..." />
+                        <img :src="friend.photo" class="contact-img" alt="..." />
                     </div>
                 </div>
             </div>
@@ -45,12 +44,19 @@
 <script>
 import { FriendService } from "../../services/FriendService"
 
-export default {
+    export default {
         name: 'EditManager',
         data: function () {
             return {
                 friendId: this.$route.params.friendId,
-                friend: {},
+                friend: {
+                    name: '',
+                    company: '',
+                    email: '',
+                    mobile: '',
+                    photo: '',
+                    groupID: ''
+                },
                 errorMessage: null,
                 groups: []
             }
@@ -65,8 +71,22 @@ export default {
             catch (error) {
                 this.errorMessage = error;
             }
+        },
+        methods: {
+            updateSubmit: async function () {
+                try {
+                    let response = await FriendService.updateFriend(this.friend, this.friendId);
+                    if (response) {
+                        return this.$router.push('/');
+                    } else {
+                        return this.$router.push(`/friends/edit/${this.friendId}`);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }
-}
+    }
 </script>
 
 <style scoped>
