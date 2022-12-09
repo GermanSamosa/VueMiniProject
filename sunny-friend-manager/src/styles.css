@@ -4,3 +4,20 @@ body {
     font-family: 'Noto Sans TC', sans-serif !important;
     background-color: rgb(255, 236, 200) !important;
 }
+.contact-img {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    margin: .5rem;
+    border: 1px solid black;
+}
+.contact-img-big {
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    margin: .5rem;
+    border: 1px solid black;
+}
+*{
+    transition: 0.5s ease-in-out;
+}

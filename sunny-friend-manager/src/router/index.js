@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import views from '../views'
 import HomeView from '../views/HomeView.vue'
-// import FriendManager from '../view/FriendManager'
-// import AddFriend from '../view/AddFriend'
-// import ViewFriend from '../view/ViewFriend'
-// import EditFriend from '../view/EditFriend'
+import FriendManager from '@/views/FriendManager.vue'
+import AddFriend from '@/views/AddFriend.vue'
+import ViewFriend from '@/views/ViewFriend.vue'
+import EditFriend from '@/views/EditFriend.vue'
+import PageNotFoundVue from '../views/PageNotFound.vue'
 
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/friends',
     name: 'FriendManager',
-    component: AddFriend
+    component: FriendManager
   },
   {
     path: '/friends/add',
@@ -33,7 +33,12 @@ const routes = [
     path: '/friends/view/:friendId',
     name: 'ViewFriend',
     component: ViewFriend
-  }
+},
+{
+    path: '/:pathMatch(.*)*',
+    name: 'PageNotFound',
+    component: PageNotFoundVue
+}
 ]
 
 const router = createRouter({

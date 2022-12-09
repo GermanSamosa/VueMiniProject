@@ -1,11 +1,14 @@
 <template>
-  <h2>App Component <i class="bi bi-0-circle"></i></h2>
-  <button class="btn btn-outline-dark">hello</button>
+    <NavBar/>
+  <router-view/>
 </template>
 
 <script>
+    import NavBar from '@/components/NavBar.vue';
+
   export default {
-    name: 'App'
+        name: 'App',
+        components: { NavBar }
   }
 </script>
 
@@ -14,7 +17,6 @@
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
